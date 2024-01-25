@@ -1,9 +1,10 @@
 import { GameState } from '../data';
 
 function Game({
-    host = false,
+    // Uncomment these when they become used
+    // host = false,
     state,
-    onChange,
+    // onChange,
 }: {
     host?: boolean;
     state: GameState;
