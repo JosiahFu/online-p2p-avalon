@@ -1,6 +1,7 @@
 import { Dispatch, useState } from 'react';
+import TextInput from './TextInput';
 
-function StringInput({
+function StringSubmit({
     onSubmit,
     placeholder,
     buttonText = 'Submit',
@@ -13,9 +14,9 @@ function StringInput({
 
     return (
         <div>
-            <input
+            <TextInput
                 value={value}
-                onChange={event => setValue(event.target.value)}
+                onChange={setValue}
                 placeholder={placeholder}
             />
             <button onClick={() => onSubmit(value)}>{buttonText}</button>
@@ -23,4 +24,4 @@ function StringInput({
     );
 }
 
-export default StringInput;
+export default StringSubmit;

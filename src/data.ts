@@ -1,14 +1,22 @@
+type Role = 'arthur_servant' | 'mordred_minion' | 'mordred' | 'morgana' | 'merlin' | 'percival' | 'assassin' | 'oberon';
+
 interface StartState {
-    playerCount: number;
+    players: {
+        name: string;
+    }[];
     status: 'start';
 }
 
 interface BaseState<S extends string> {
     status: S;
-    players: ('arthur_servant' | 'mordred_minion' | 'mordred' | 'morgana' | 'merlin' | 'percival' | 'assassin' | 'oberon')[];
+    players: {
+        name: string;
+        role: Role;
+    }[];
     quests: {
         partySize: number;
-        result: boolean | undefined; // undefined = incomplete, true = good win, false = bad win
+        /** undefined = incomplete, true = good win, false = bad win */
+        result: boolean | undefined;
     }[];
     failedQuests: number;
 }
@@ -20,6 +28,7 @@ interface PlayState<P extends string> extends BaseState<'playing'> {
 }
 
 interface VotePlayState<P extends string> extends PlayState<P> {
+    /** true = pass or approve, false = fail or disapprove */
     votes: (boolean | undefined)[];
 }
 
