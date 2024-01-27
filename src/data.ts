@@ -28,3 +28,5 @@ interface EndState extends BaseState<'end'> {
 }
 
 export type GameState = StartState | PlayState<'discussion'> | VotePlayState<'voting'> | VotePlayState<'quest'> | PlayState<'quest_result'> | BaseState<'assassin'> | EndState;
+
+export const peerIdPrefix = 'wss-avalon-'

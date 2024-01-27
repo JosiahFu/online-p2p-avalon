@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { GameState } from '../data';
+import { GameState, peerIdPrefix } from '../data';
 import Game from './Game';
 import { useHostState } from '@tater-archives/react-use-peer-state';
 import { useWatch } from '../lib/useWatch';
@@ -20,7 +20,7 @@ function Host() {
     );
 
     const [gameState, setGameState, realId, connections] =
-        useHostState<GameState>(gameId, {
+        useHostState<GameState>(gameId ? peerIdPrefix + gameId : undefined, {
             status: 'start',
             playerCount: 1,
         });
@@ -36,7 +36,7 @@ function Host() {
         <>
             {gameState.status === 'start' && (
                 <>
-                    <p>Game id: {realId ?? 'Loading...'}</p>
+                    <p>Game id: {realId ? gameId : 'Loading...'}</p>
                 </>
             )}
             <Game state={gameState} onChange={setGameState} host />

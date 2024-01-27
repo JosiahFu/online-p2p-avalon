@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GameState } from '../data';
+import { GameState, peerIdPrefix } from '../data';
 import Game from './Game';
 import { useClientState } from '@tater-archives/react-use-peer-state';
 import StringInput from '../lib/components/StringInput';
@@ -7,8 +7,9 @@ import StringInput from '../lib/components/StringInput';
 function Client() {
     const [gameId, setGameId] = useState<string>();
 
-    const [gameState, setGameState, connected] =
-        useClientState<GameState>(gameId);
+    const [gameState, setGameState, connected] = useClientState<GameState>(
+        peerIdPrefix + gameId
+    );
 
     return (
         <>
