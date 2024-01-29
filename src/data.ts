@@ -21,10 +21,9 @@ interface BaseState<S extends string> {
     failedQuests: number;
 }
 
-interface PlayState<P extends string> extends BaseState<'playing'> {
+interface PlayState<P extends string> extends BaseState<P> {
     currentLeader: number;
     currentQuest: number;
-    phase: P;
 }
 
 interface VotePlayState<P extends string> extends PlayState<P> {
@@ -36,6 +35,6 @@ interface EndState extends BaseState<'end'> {
     assassinTarget?: number;
 }
 
-export type GameState = StartState | PlayState<'discussion'> | VotePlayState<'voting'> | VotePlayState<'quest'> | PlayState<'quest_result'> | BaseState<'assassin'> | EndState;
+export type GameState = StartState | PlayState<'discussion'> | VotePlayState<'voting'> | VotePlayState<'quest'> | VotePlayState<'quest_result'> | BaseState<'assassin'> | EndState;
 
 export const peerIdPrefix = 'wss-avalon-'
