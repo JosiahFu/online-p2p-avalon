@@ -1,37 +1,43 @@
-type Role = 'arthur_servant' | 'mordred_minion' | 'mordred' | 'morgana' | 'merlin' | 'percival' | 'assassin' | 'oberon';
+export type Role = 'arthur_servant' | 'mordred_minion' | 'merlin' | 'assassin' | OptionalRoles;
+export type OptionalRoles = 'mordred' | 'morgana' | 'percival' | 'oberon';
 
-interface StartState {
+export interface Quest {
+    partySize: number,
+    fails: number,
+}
+
+export interface StartState {
     players: {
         name: string;
     }[];
+    roles: Record<OptionalRoles, boolean>;
     status: 'start';
 }
 
-interface BaseState<S extends string> {
+export interface BaseState<S extends string> {
     status: S;
     players: {
         name: string;
         role: Role;
     }[];
-    quests: {
-        partySize: number;
+    quests: (Quest & {
         /** undefined = incomplete, true = good win, false = bad win */
         result: boolean | undefined;
-    }[];
+    })[];
     failedQuests: number;
 }
 
-interface PlayState<P extends string> extends BaseState<P> {
+export interface PlayState<P extends string> extends BaseState<P> {
     currentLeader: number;
     currentQuest: number;
 }
 
-interface VotePlayState<P extends string> extends PlayState<P> {
+export interface VotePlayState<P extends string> extends PlayState<P> {
     /** true = pass or approve, false = fail or disapprove */
     votes: (boolean | undefined)[];
 }
 
-interface EndState extends BaseState<'end'> {
+export interface EndState extends BaseState<'end'> {
     assassinTarget?: number;
 }
 

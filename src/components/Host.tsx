@@ -23,6 +23,12 @@ function Host({ name }: { name: string }) {
         {
             status: 'start',
             players: [{ name }],
+            roles: {
+                mordred: false,
+                morgana: false,
+                oberon: false,
+                percival: false,
+            },
         }
     );
 
